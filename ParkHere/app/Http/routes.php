@@ -19,3 +19,10 @@ Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
+
+Route::get('master_template', 'MasterTemplateController@index');
+
+Route::get('form_permohonan', 'PermohonanController@form');
+Route::get('daftar_permohonan', 'PermohonanController@get');
+Route::get('detil_permohonan', 'PermohonanController@detil');
+Route::post('permohonan', 'PermohonanController@entry');

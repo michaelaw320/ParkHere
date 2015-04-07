@@ -20,8 +20,9 @@ class PermohonanController extends Controller {
         return view('permohonan.daftar_permohonan', compact('permohonans'));
     }
 
-    public function detil() {
-        return view('permohonan.detil_permohonan');
+    public function detil($id_permohonan) {
+        $permohonan = Permohonan::where('id_permohonan', '=', $id_permohonan)->firstOrFail();
+        return view('permohonan.detil_permohonan', compact('permohonan','Permohonan'));
     }
 
     public function entry() {
@@ -29,6 +30,7 @@ class PermohonanController extends Controller {
 
         $input['updated_at'] = Carbon::now();
         $input['created_at'] = Carbon::now();
+        $input['status_permohonan'] = Permohonan::menunggu_validasi;
 
         $db = Permohonan::create($input);
 

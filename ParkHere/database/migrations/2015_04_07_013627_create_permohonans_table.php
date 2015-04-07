@@ -23,6 +23,7 @@ class CreatePermohonansTable extends Migration {
             $table->integer('biaya_retribusi');
             $table->binary('bukti_pembayaran');
             $table->string('email_pemohon');
+            $table->string('lokasi_parkir');
 		});
 	}
 

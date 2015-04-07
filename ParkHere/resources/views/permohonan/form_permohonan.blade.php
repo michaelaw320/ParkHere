@@ -3,8 +3,8 @@
 
 {!! Form::open(['url' => 'permohonan']) !!}
 
-    {!! Form::label('email', 'Alamat Email:') !!}
-    {!! Form::text('email') !!}
+    {!! Form::label('email_pemohon', 'Alamat Email:') !!}
+    {!! Form::text('email_pemohon') !!}
 
     <br><br>
     {!! Form::label('tipe_pemohon', 'Tipe Pemohon:') !!}
@@ -13,6 +13,10 @@
     <br><br>
     {!! Form::label('id_pemohon', 'No ID Pemohon:') !!}
     {!! Form::text('id_pemohon') !!}
+
+    <br><br>
+    {!! Form::label('id_surat_tanah', 'No Surat Tanah:') !!}
+    {!! Form::text('id_surat_tanah') !!}
 
     <br><br>
     {!! Form::submit('Entri Pengaduan') !!}

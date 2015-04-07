@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use App\Permohonan;
 use Request;
+use Carbon\Carbon;
 
 class PermohonanController extends Controller {
 
@@ -26,7 +27,12 @@ class PermohonanController extends Controller {
     public function entry() {
         $input = Request::all();
 
+        $input['updated_at'] = Carbon::now();
+        $input['created_at'] = Carbon::now();
 
+        $db = Permohonan::create($input);
+
+        return redirect('daftar_permohonan');
     }
 
 }

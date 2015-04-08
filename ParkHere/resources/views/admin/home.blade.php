@@ -19,11 +19,16 @@
 
 @stop
 
-@section('guest')
+@section('admin')
 <ul class="nav navbar-nav">
 	<li class="active"><a href="home">Beranda</a></li>
-	<li><a href="form_permohonan">Permohonan</a></li>
 	<li><a href="daftar_permohonan">Daftar Permohonan</a></li>
+	<li><a href="laporan">Laporan</a></li>
+</ul>
+<ul class="nav navbar-nav navbar-right">
+	<li><a href="#">welcome {{$admin->name}}</a></li>
+	<li><a href="profile">Profile</a></li>
+	<li><a href="logout">Logout</a></li>
 </ul>
 
 @stop
@@ -68,7 +73,7 @@
 		</div>
 	  </div>
 	</div>	
-
+	
 	<!-- Left and right controls -->
 	<a class="left carousel-control" href="#homeCarousel" role="button" data-slide="prev">
 	  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>

@@ -1,10 +1,15 @@
 @extends('app')
 
-@section('guest')
+@section('admin')
 <ul class="nav navbar-nav">
     <li><a href="home">Beranda</a></li>
-    <li><a href="form_permohonan">Permohonan</a></li>
     <li class="active"><a href="daftar_permohonan">Daftar Permohonan</a></li>
+    <li><a href="laporan">Laporan</a></li>
+</ul>
+<ul class="nav navbar-nav navbar-right">
+    <li><a href="#">welcome {{$admin->name}}</a></li>
+    <li><a href="profile">Profile</a></li>
+    <li><a href="logout">Logout</a></li>
 </ul>
 @stop
 
@@ -29,30 +34,20 @@
     		<td>{{ $permohonan->biaya_retribusi  }}</td>
     		<td>{{ $permohonan->tanggal_dibuat  }} hingga {{ $permohonan->tanggal_expired  }}</td>
     		<td>{{ $permohonan->status_permohonan  }}</td>
-            @if($permohonan->status_permohonan == "Menunggu Validasi")
     		<td>
-                {!! Form::open(['url' => 'editPermohonan']) !!}
+
+    			{!! Form::open(['url' => 'admin/editPermohonan']) !!}
                     {!! Form::hidden('id', $permohonan->id) !!}
-                    <div class="col-sm-2">
-                        <button class="glyphicon glyphicon-cog"></button>
-                    </div>
+	    			<div class="col-sm-2">
+	    				<button class="glyphicon glyphicon-cog"></button>
+	    			</div>
                 {!! Form::close() !!}
-                    <div class="col-sm-2">
-                        <button class="glyphicon glyphicon-trash" href="#" onclick="deleteFunction({{ $permohonan->id }}); return false();"></button>
-                    </div>
+	    			<div class="col-sm-2">
+	    				<button class="glyphicon glyphicon-trash" href="#" onclick="deleteFunction({{ $permohonan->id }}); return false();"></button>
+	    			</div>
             </td>
-            @endif
-            @if($permohonan->status_permohonan == "Selesai Validasi")
-            <td>
-                {!! Form::open(['url' => 'bayarRetribusi']) !!}
-                    {!! Form::hidden('id', $permohonan->id) !!}
-                    <div class="col-sm-2">
-                        <button class="glyphicon glyphicon-envelope"></button>
-                    </div>
-                {!! Form::close() !!}
-            @endif
-        </tr>
-        @endforeach
+ 		</tr>
+		@endforeach
     </tbody>
 </table>
 

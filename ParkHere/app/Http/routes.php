@@ -76,7 +76,21 @@ Route::post('updateBayarRetribusi', array(
 	'uses' => 'PermohonanController@updateBayarRetribusi')
 	);
 
+Route::get('download/{filename}', 'PermohonanController@downloadLampiran');
+
+//route for perizinan
+
+Route::get('daftar_izin', array(
+	'as' => 'daftar_izin',
+	'uses' => 'PerizinanController@getDaftarIzin')
+	);
+
 // route for admin page
+Route::get('admin/', array(
+	'as' => 'admin.home',
+	'array' => 'AdminController@home'
+	)
+	);
 
 Route::get('admin/login', array(
 	'as' => 'admin/login',
@@ -128,7 +142,22 @@ Route::post('admin/generatePDF', array(
 	'uses' => 'AdminController@generatePDF')
 	);	
 
+Route::get('admin/daftar_izin', array(
+	'as' => 'admin/daftar_izin',
+	'uses' => 'AdminController@getDaftarIzin')
+	);
+
 //delete permohonan
 
 Route::get('admin/delete_permohonan/{id}', 'AdminController@deletePermohonan');
 Route::get('delete_permohonan/{id}', 'PermohonanController@deletePermohonan');
+
+Route::get('loginsso', array(
+	'as' => 'loginsso',
+	'uses' => 'SSOController@loginsso')
+	);
+
+Route::get('logoutsso', array(
+	'as' => 'logoutsso',
+	'uses' => 'SSOController@logoutsso')
+	);

@@ -2,8 +2,9 @@
 
 @section('admin')
 <ul class="nav navbar-nav">
-    <li><a href="home">Beranda</a></li>
-    <li class="active"><a href="daftar_permohonan">Daftar Permohonan</a></li>
+    <li><a href="{{URL::route('admin/home')}}">Beranda</a></li>
+    <li class="active"><a href="{{URL::route('admin/daftar_permohonan')}}">Daftar Permohonan</a></li>
+    <li><a href="{{URL::route('admin/daftar_izin')}}">Daftar Perizinan</a></li>
     <li><a href="laporan">Laporan</a></li>
 </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -96,7 +97,7 @@
                 <div class="form-group">
                     {!! Form::label('status_permohonan', 'Status Permohonan')!!}
                     <div class="input-group">
-                        {!! Form::select('status_permohonan', array('Menunggu Validasi' => 'Menunggu Validasi', 'Selesai Validasi' => 'Selesai Validasi'), 
+                        {!! Form::select('status_permohonan', array('Menunggu Validasi' => 'Menunggu Validasi','Menunggu Pembayaran Retribusi' => 'Menunggu Pembayaran Retribusi' , 'Selesai' => 'Selesai'), 
                             $permohonan->status_permohonan,  ['class' => 'form-control', 'required']) !!}
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                     </div>

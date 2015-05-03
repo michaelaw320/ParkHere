@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use App\Permohonan;
 use App\Admin;
+use App\Perizinan;
 use Request;
 use Carbon\Carbon;
 use PDF;
@@ -13,6 +14,14 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller {
+
+    public function home(){
+        if(Session::has('admin')){
+            return Redirect::route('admin/home');
+        } else {
+            return Redirect::route('admin/login');
+        }
+    }
 
 	public function getLogin(){
         return view('admin.login');

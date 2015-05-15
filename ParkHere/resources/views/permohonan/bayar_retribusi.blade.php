@@ -17,7 +17,7 @@
     <br> <br> <br>
     <div class="container">
         <div class="row">
-            {!! Form::open(['url' => 'updateBayarRetribusi', 'role' => 'form', 'files' => 'true']) !!}
+            {!! Form::open(['route' => 'updateBayarRetribusi', 'role' => 'form', 'files' => 'true']) !!}
                 <div class="col-lg-6">
                     <div class="well well-sm"><strong>Pembayaran Retribusi</strong></div>    
                     <div class="form-group">

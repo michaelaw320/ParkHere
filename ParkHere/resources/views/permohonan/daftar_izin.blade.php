@@ -4,8 +4,8 @@
     @section('guest')
     <ul class="nav navbar-nav">
         <li><a href="{{URL::route('home')}}">Beranda</a></li>
-        <li><a href="{{URL::route('form_permohonan')}}">Ajukan perizinan</a></li>
-        <li><a href="{{URL::route('daftar_permohonan')}}">Daftar perizinan</a></li>
+        <li><a href="{{URL::route('form_permohonan')}}">Ajukan permohonan</a></li>
+        <li><a href="{{URL::route('daftar_permohonan')}}">Daftar permohonan</a></li>
         <li class="active"><a href="{{URL::route('daftar_izin')}}">Daftar Izin</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">

@@ -80,7 +80,7 @@
                     <div class="form-group">
                         {!! Form::label('lampiran', 'Lampiran Surat Izin Mendirikan Bangunan:') !!}
                         <div>
-                            <a href="download/{{$permohonan->lampiran}}" class="btn btn-sm btn-info"}>Download Lampiran Sebelumnya</a>
+                            <a href="{{URL::route('downloadLampiran',[$permohonan->lampiran])}}" class="btn btn-sm btn-info"}>Download Lampiran Sebelumnya</a>
                         <div>
                         <div class="input-group">
                             {!! Form::File('lampiran', ['class' => 'form-control']) !!}

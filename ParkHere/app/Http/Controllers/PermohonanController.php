@@ -247,14 +247,63 @@ class PermohonanController extends Controller {
     }
 
     public function updateBayarRetribusi(){
+        $input = Request::all();
+        $permohonan = Permohonan::where('id', '=', $input['id'])->firstOrFail();
+
+        $validator = array('enroll' => 'Terjadi Error: File bukti pembayaran harus berbentuk JPG/JPEG');
+
+        if(Request::file('bukti_pembayaran') != null){
+
+            if(Request::file('bukti_pembayaran')->getClientOriginalExtension() != "jpg"){
+                return Redirect::back()->with('permohonan', $permohonan)->withErrors($validator);
+            }
+
+            $filename = $permohonan->key.'-BuktiPembayaran.'.Request::file('bukti_pembayaran')->getClientOriginalExtension();
+
+            Request::file('bukti_pembayaran')->move('./storage/'.$permohonan->id_pemohon.'/', $filename);
+        }
+        $_permohonan = [
+            'id_pemohon' => $permohonan->id_pemohon,
+            'email_pemohon' => $permohonan->email_pemohon,
+            'id_surat_tanah' => $permohonan->id_surat_tanah,
+            'jenis_pemohon' => $permohonan->jenis_pemohon,
+            'jenis_permohonan' => $permohonan->jenis_permohonan,
+            'lokasi_tanah' => $permohonan->lokasi_tanah,
+            'tanggal_dibuat' => $permohonan->tanggal_dibuat,
+            'tanggal_expired' => $permohonan->tanggal_expired,
+            'key' => $permohonan->key
+        ];
+
+        $data = [
+                'permohonan' => $_permohonan
+            ];
+
+        try {
+            Mail::send('permohonan.notifikasi_bukti_pembayaran', $data, function($message) use ($_permohonan)
+            {
+                $message->from('if3250.ppl.parkhere@gmail.com', 'Administrasi Aplikasi Terkait Izin Parkir dan Terminal');
+                $message->to($_permohonan['email_pemohon'])->subject('Bukti pembayaran permohonan izin parkir dan terminal');
+            });
+        } catch (Exception $e) {
+            return Redirect::route('home');
+        }
+
+        $permohonan->bukti_pembayaran = $filename;
+        
+        $permohonan->save();
+
         return Redirect::route('daftar_permohonan');
     }
 
-    public function downloadLampiran($filename){
-        $file= public_path().'/storage/'.Session::get('user')->id.'/'.$filename;
-        $headers = array(
-          'Content-Type: application/pdf',
-        );
-        return Response::download($file, 'lampiran.pdf', $headers);
+    public function getDaftarIzin(){
+        try{
+            $user = Session::get('user');
+        } catch (Exception $e) {
+            return Redirect::route('home');
+        }
+
+        $perizinans = Perizinan::where('id_pemohon', $user->id)->get();
+
+        return view('permohonan.daftar_izin', compact('perizinans'));
     }
 }
